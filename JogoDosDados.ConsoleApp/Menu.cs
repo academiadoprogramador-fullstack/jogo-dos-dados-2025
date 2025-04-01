@@ -22,8 +22,7 @@ public class Menu
         Console.WriteLine("----------------------------------");
     }
 
-
-    public void ExibirPosicaoJogador(int limiteLinhaChegada, int posicaoUsuario)
+    public void ExibirPosicaoJogador(int posicaoUsuario, int limiteLinhaChegada)
     {
         Console.WriteLine($"O jogador está na posição: {posicaoUsuario} de {limiteLinhaChegada}!");
     }
@@ -52,8 +51,8 @@ public class Menu
         Console.WriteLine("----------------------------------");
     }
 
-    public void ExibirMensagemVitoria()
+    public void ExibirMensagemVitoria(string nomeUsuario)
     {
-        Console.WriteLine("Parabéns! Você alcançou a linha de chegada!");
+        Console.WriteLine($"{nomeUsuario} alcançou a linha de chegada!");
     }
 }
