@@ -9,7 +9,9 @@
 
             while (true)
             {
-                int posicaoUsuario = 0;
+                Jogador usuario = new Jogador();
+                usuario.posicao = 0;
+
                 int posicaoComputador = 0;
 
                 bool jogoEmAndamento = true;
@@ -20,89 +22,91 @@
 
                     menu.ExibirCabecalho();
 
-                    int resultadoUsuario = SortearDado();
+                    LancadorDados lancadorDados = new LancadorDados(); 
+
+                    int resultadoUsuario = lancadorDados.Sortear();
 
                     menu.ExibirResultadoSorteio(resultadoUsuario);
 
-                    posicaoUsuario += resultadoUsuario;
+                    usuario.AvancarPosicao(resultadoUsuario);
 
-                    menu.ExibirPosicaoJogador(limiteLinhaChegada, posicaoUsuario);
+                    menu.ExibirPosicaoJogador(limiteLinhaChegada, usuario.posicao);
 
-                    if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
-                    {
-                        menu.ExibirMensagemAvancoEspecial();
+                    //if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
+                    //{
+                    //    menu.ExibirMensagemAvancoEspecial();
 
-                        posicaoUsuario += 3;
+                    //    posicaoUsuario += 3;
 
-                        menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
+                    //    menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
 
-                    }
-                    else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
-                    {
-                        menu.ExibirMensagemRecuoEspecial();
+                    //}
+                    //else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
+                    //{
+                    //    menu.ExibirMensagemRecuoEspecial();
 
-                        posicaoUsuario -= 2;
+                    //    posicaoUsuario -= 2;
 
-                        menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
-                    }
+                    //    menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
+                    //}
 
-                    if (posicaoUsuario >= limiteLinhaChegada)
-                    {
-                        menu.ExibirMensagemVitoria();
+                    //if (posicaoUsuario >= limiteLinhaChegada)
+                    //{
+                    //    menu.ExibirMensagemVitoria();
 
-                        jogoEmAndamento = false;
-                        continue;
-                    }
+                    //    jogoEmAndamento = false;
+                    //    continue;
+                    //}
 
-                    Console.WriteLine("----------------------------------");
-                    Console.WriteLine("Rodada do Computador");
-                    Console.WriteLine("----------------------------------");
-                    Console.Write("Pressione ENTER para visualizar a rodada do computador...");
-                    Console.ReadLine();
+                    //Console.WriteLine("----------------------------------");
+                    //Console.WriteLine("Rodada do Computador");
+                    //Console.WriteLine("----------------------------------");
+                    //Console.Write("Pressione ENTER para visualizar a rodada do computador...");
+                    //Console.ReadLine();
 
-                    int resultadoComputador = SortearDado();
+                    //int resultadoComputador = SortearDado();
 
-                    Console.WriteLine("----------------------------------");
-                    Console.WriteLine($"O valor sorteado foi: {resultadoComputador}!");
-                    Console.WriteLine("----------------------------------");
+                    //Console.WriteLine("----------------------------------");
+                    //Console.WriteLine($"O valor sorteado foi: {resultadoComputador}!");
+                    //Console.WriteLine("----------------------------------");
 
-                    posicaoComputador += resultadoComputador;
+                    //posicaoComputador += resultadoComputador;
 
-                    Console.WriteLine($"O computador está na posição: {posicaoComputador} de {limiteLinhaChegada}!");
+                    //Console.WriteLine($"O computador está na posição: {posicaoComputador} de {limiteLinhaChegada}!");
 
-                    if (posicaoComputador == 5 || posicaoComputador == 10 || posicaoComputador == 15 || posicaoComputador == 25)
-                    {
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine("EVENTO ESPECIAL: Avanço extra de 3 casas!");
+                    //if (posicaoComputador == 5 || posicaoComputador == 10 || posicaoComputador == 15 || posicaoComputador == 25)
+                    //{
+                    //    Console.WriteLine("----------------------------------");
+                    //    Console.WriteLine("EVENTO ESPECIAL: Avanço extra de 3 casas!");
 
-                        posicaoComputador += 3;
+                    //    posicaoComputador += 3;
 
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine($"O computador avançou para a posição: {posicaoComputador}!");
-                        Console.WriteLine("----------------------------------");
+                    //    Console.WriteLine("----------------------------------");
+                    //    Console.WriteLine($"O computador avançou para a posição: {posicaoComputador}!");
+                    //    Console.WriteLine("----------------------------------");
 
-                    }
-                    else if (posicaoComputador == 7 || posicaoComputador == 13 || posicaoComputador == 20)
-                    {
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
+                    //}
+                    //else if (posicaoComputador == 7 || posicaoComputador == 13 || posicaoComputador == 20)
+                    //{
+                    //    Console.WriteLine("----------------------------------");
+                    //    Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
 
-                        posicaoComputador -= 2;
+                    //    posicaoComputador -= 2;
 
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine($"O computador recuou para a posição: {posicaoComputador}!");
-                        Console.WriteLine("----------------------------------");
-                    }
+                    //    Console.WriteLine("----------------------------------");
+                    //    Console.WriteLine($"O computador recuou para a posição: {posicaoComputador}!");
+                    //    Console.WriteLine("----------------------------------");
+                    //}
 
-                    if (posicaoComputador >= limiteLinhaChegada)
-                    {
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine("Que pena! O computador alcançou a linha de chegada, tente novamente!");
-                        Console.WriteLine("----------------------------------");
+                    //if (posicaoComputador >= limiteLinhaChegada)
+                    //{
+                    //    Console.WriteLine("----------------------------------");
+                    //    Console.WriteLine("Que pena! O computador alcançou a linha de chegada, tente novamente!");
+                    //    Console.WriteLine("----------------------------------");
 
-                        jogoEmAndamento = false;
-                        continue;
-                    }
+                    //    jogoEmAndamento = false;
+                    //    continue;
+                    //}
 
                     Console.ReadLine();
                 }
@@ -115,13 +119,6 @@
             }
         }
 
-        static int SortearDado()
-        {
-            Random geradorDeNumeros = new Random();
-
-            int resultado = geradorDeNumeros.Next(1, 7);
-
-            return resultado;
-        }
+       
     }
 }
