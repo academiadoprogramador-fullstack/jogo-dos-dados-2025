@@ -9,7 +9,10 @@
 
             while (true)
             {
+                Menu menu = new Menu();
+                LancadorDados lancadorDados = new LancadorDados();
                 Jogador usuario = new Jogador();
+
                 usuario.posicao = 0;
 
                 int posicaoComputador = 0;
@@ -18,11 +21,7 @@
 
                 while (jogoEmAndamento)
                 {
-                    Menu menu = new Menu();
-
                     menu.ExibirCabecalho();
-
-                    LancadorDados lancadorDados = new LancadorDados(); 
 
                     int resultadoUsuario = lancadorDados.Sortear();
 
@@ -32,31 +31,31 @@
 
                     menu.ExibirPosicaoJogador(limiteLinhaChegada, usuario.posicao);
 
-                    //if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
-                    //{
-                    //    menu.ExibirMensagemAvancoEspecial();
+                    if (usuario.EstaNaPosicaoAvancoEspecial())
+                    {
+                        menu.ExibirMensagemAvancoEspecial();
 
-                    //    posicaoUsuario += 3;
+                        usuario.AvancarPosicaoEspecial();
 
-                    //    menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
+                        menu.ExibirPosicaoAvancoEspecial(usuario.posicao);
 
-                    //}
-                    //else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
-                    //{
-                    //    menu.ExibirMensagemRecuoEspecial();
+                    }
+                    else if (usuario.EstaNaPosicaoRecuoEspecial())
+                    {
+                        menu.ExibirMensagemRecuoEspecial();
 
-                    //    posicaoUsuario -= 2;
+                        usuario.RecuarPosicaoEspecial();
 
-                    //    menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
-                    //}
+                        menu.ExibirPosicaoRecuoEspecial(usuario.posicao);
+                    }
 
-                    //if (posicaoUsuario >= limiteLinhaChegada)
-                    //{
-                    //    menu.ExibirMensagemVitoria();
+                    if (usuario.UltrapassouLinhaChegada(limiteLinhaChegada))
+                    {
+                        menu.ExibirMensagemVitoria();
 
-                    //    jogoEmAndamento = false;
-                    //    continue;
-                    //}
+                        jogoEmAndamento = false;
+                        continue;
+                    }
 
                     //Console.WriteLine("----------------------------------");
                     //Console.WriteLine("Rodada do Computador");
