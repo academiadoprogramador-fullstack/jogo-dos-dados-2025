@@ -1,18 +1,6 @@
 ﻿namespace JogoDosDados.ConsoleApp
 {
-    /** Versão 4 - Incluir o computador como concorrente
-      * Informar que o computador está jogando
-      * Armazenar a posição do computador na pista e atualizar o valor após o lançamento do dado  
-      * Atualizar a posição do computador após seu lançamento de dado
-      * Implementar o evento de avanço extra nas posições 5, 10, 15
-      * Implementar o evento de recuo nas posições 7, 13, 20
-      * Exibir mensagens informativas quando os eventos ocorrerem
-      * Atualizar a posição do jogador conforme as regras dos eventos 
-      * Exibir a nova posição
-      * Verificar se o computador alcançou ou ultrapassou a linha de chegada
-      * Informar quem venceu o jogo
-      * Implementar turnos alternados entre jogador e computador
-    **/
+    // Versão 5 - Implementação Orientada a Objetos
     internal class Program
     {
         static void Main(string[] args)
@@ -28,50 +16,39 @@
 
                 while (jogoEmAndamento)
                 {
-                    Console.Clear();
-                    Console.WriteLine("----------------------------------");
-                    Console.WriteLine("Jogo dos Dados");
-                    Console.WriteLine("----------------------------------");
-                    Console.WriteLine("Rodada do Usuário");
-                    Console.WriteLine("----------------------------------");
-                    Console.Write("Pressione ENTER para lançar o dado...");
-                    Console.ReadLine();
+                    Menu menu = new Menu();
+
+                    menu.ExibirCabecalho();
 
                     int resultadoUsuario = SortearDado();
 
-                    Console.WriteLine("----------------------------------");
-                    Console.WriteLine($"O valor sorteado foi: {resultadoUsuario}!");
-                    Console.WriteLine("----------------------------------");
+                    menu.ExibirResultadoSorteio(resultadoUsuario);
 
                     posicaoUsuario += resultadoUsuario;
 
-                    Console.WriteLine($"Você está na posição: {posicaoUsuario} de {limiteLinhaChegada}!");
+                    menu.ExibirPosicaoJogador(limiteLinhaChegada, posicaoUsuario);
 
                     if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
                     {
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine("EVENTO ESPECIAL: Avanço extra de 3 casas!");
+                        menu.ExibirMensagemAvancoEspecial();
 
                         posicaoUsuario += 3;
 
-                        Console.WriteLine($"Você avançou para a posição: {posicaoUsuario}!");
-                        Console.WriteLine("----------------------------------");
+                        menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
 
                     }
                     else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
                     {
-                        Console.WriteLine("----------------------------------");
-                        Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
+                        menu.ExibirMensagemRecuoEspecial();
 
                         posicaoUsuario -= 2;
 
-                        Console.WriteLine($"Você recuou para a posição: {posicaoUsuario}!");
-                        Console.WriteLine("----------------------------------");
+                        menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
                     }
 
                     if (posicaoUsuario >= limiteLinhaChegada)
                     {
-                        Console.WriteLine("Parabéns! Você alcançou a linha de chegada!");
+                        menu.ExibirMensagemVitoria();
 
                         jogoEmAndamento = false;
                         continue;
